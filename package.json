@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-angelco-aggregator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bin/www"
+  },
+  "author": "Videal LLC",
+  "license": "ISC",
+  "dependencies": {
+    "https-proxy-agent": "^1.0.0",
+    "nodejs-angelco-database": "git+https://github.com/videal/nodejs-angelco-database.git",
+    "nodejs-email-address-generator": "git+https://github.com/videal/nodejs-email-address-generator.git",
+    "nodejs-google-api-socialgraph-hovercard-lookup": "git+https://github.com/videal/nodejs-google-api-socialgraph-hovercard-lookup.git",
+    "nodejs-proxy-changer": "git+https://github.com/ToruHyuga/nodejs-proxy-changer.git",
+    "nodejs-proxy-checker": "git+https://github.com/ToruHyuga/nodejs-proxy-checker.git",
+    "nodejs-proxy-filter": "git+https://github.com/ToruHyuga/nodejs-proxy-filter.git",
+    "nodejs-proxy-list": "git+https://github.com/ToruHyuga/nodejs-proxy-list.git",
+    "nodejs-proxy-model": "git+https://github.com/ToruHyuga/nodejs-proxy-model.git",
+    "request": "^2.73.0"
+  }
+}
