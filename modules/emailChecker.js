@@ -1,4 +1,5 @@
 const lookup = require('nodejs-google-api-socialgraph-hovercard-lookup');
+const configurations = require('./configurations');
 const request = require('request');
 var interval;
 module.exports = (company) => {
