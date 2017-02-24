@@ -9,7 +9,7 @@ module.exports = (company) => {
                 founder.emails = [];
                 var name = founder.name.split(' ');
                 var site = company.site.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i)[2];
-                var generated = emailGenerator.build(name[0], name[1], '', site);
+                var generated = emailGenerator.build(name[0], name[1], undefined, site, true);
                 if (generated != undefined) {
                     for (var e = 0; e < generated.length; e++) {
                         founder.emails.push(generated[e]);
