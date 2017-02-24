@@ -1,7 +1,6 @@
 const lookup = require('nodejs-google-api-socialgraph-hovercard-lookup');
+const configurations = require('./configurations');
 const request = require('request');
-const proxy = require('./proxy');
-var proxyChanger;
 var interval;
 module.exports = (company) => {
     return new Promise((resolve, reject) => {
@@ -18,14 +17,9 @@ module.exports = (company) => {
                                 var email = founderEmails[j];
                                 return new Promise((resolve, reject) => {
                                     lookup.process(proxyAddress, request, email, (error, googlePlusUri) => {
-                                        
                                         if (googlePlusUri) {
                                             company.founders[i].emails.push(email);
                                         }
-                                        ((proxy) => {
-                                            console.log(proxy);
-                                            proxyChanger.freeProxy(proxy);
-                                        })(proxyAddress);
                                         resolve();
                                     });
                                 });
@@ -44,21 +38,19 @@ module.exports = (company) => {
         var promisesCount = promises.length;
         var run = (proxyAddress) => {
             if (p < promisesCount) {
-                //var proxyAddress = proxyChanger.takeProxy();
                 p++;
-                if (typeof(promises[p]) == 'function') {
+                if (typeof (promises[p]) == 'function') {
                     promises[p](proxyAddress);
                 }
             }
         };
-        proxy.Changer().then(result => {
-            proxyChanger = result;
-            interval = setInterval(() => {
-                var proxyAddress = proxyChanger.takeProxy();
-                 if (proxyAddress != null) {
-                     run(proxyAddress);
-                }
-            }, 100);
-        });
+        interval = setInterval(() => {
+            var username = configurations.proxy.username;
+            var password = configurations.proxy.password;
+            var port = 22225;
+            var session_id = (1000000 * Math.random()) | 0;
+            var proxyAddress = 'http://' + username + '-session-' + session_id + ':' + password + '@zproxy.luminati.io:' + port;
+            run(proxyAddress);
+        }, 3000);
     });
 };
