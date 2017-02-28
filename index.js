@@ -6,7 +6,6 @@ module.exports = () => {
         return model.company.GetWithUpdate()
             .then(result => {
                 if (result != undefined) {
-                    console.log(result.name);
                     return emailGenerator(result);
                 } else {
                     throw new Error();

@@ -16,7 +16,10 @@ module.exports = (company) => {
                             promises.push((proxyAddress) => {
                                 var email = founderEmails[j];
                                 return new Promise((resolve, reject) => {
-                                    lookup.process(proxyAddress, request, email, (error, googlePlusUri) => {
+                                    lookup.process(request, email, proxyAddress, (error, googlePlusUri) => {
+                                        if (error) {
+                                            resolve();
+                                        }
                                         if (googlePlusUri) {
                                             company.founders[i].emails.push(email);
                                         }
@@ -39,18 +42,13 @@ module.exports = (company) => {
         var run = (proxyAddress) => {
             if (p < promisesCount) {
                 p++;
-                if (typeof (promises[p]) == 'function') {
+                if (promises[p] != undefined) {
                     promises[p](proxyAddress);
                 }
             }
         };
         interval = setInterval(() => {
-            var username = configurations.proxy.username;
-            var password = configurations.proxy.password;
-            var port = 22225;
-            var session_id = (1000000 * Math.random()) | 0;
-            var proxyAddress = 'http://' + username + '-session-' + session_id + ':' + password + '@zproxy.luminati.io:' + port;
-            run(proxyAddress);
+            run();
         }, 3000);
     });
 };
