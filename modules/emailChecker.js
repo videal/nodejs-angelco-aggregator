@@ -31,7 +31,6 @@ module.exports = (company) => {
         }
         promises.push(() => {
             clearInterval(interval);
-            console.log('resolve');
             resolve(company);
         });
         var p = -1;
