@@ -5,7 +5,6 @@ module.exports = () => {
     return model.company.GetWithUpdate()
         .then(result => {
             if (result != undefined) {
-                console.log(result.founders);
                 return emailGenerator(result);
             } else {
                 throw new Error();
@@ -15,6 +14,8 @@ module.exports = () => {
             return emailChecker(result);
         })
         .then(result => {
+            console.log(result.founders);
             return model.company.UpdateCompany(result);
         });
+
 };

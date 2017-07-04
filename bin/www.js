@@ -1,4 +1,3 @@
-require('../extensions/array');
 const main = require('../');
 var start = () => {
     main()
